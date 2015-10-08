@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     Transform myTransform;
     public Image map;
     public Text text;
+    int isMap = 0;
 
     void Start()
     {
@@ -71,12 +72,16 @@ public class PlayerController : MonoBehaviour {
         }
 
         float distance = AtoBDistance(myTransform.position, treasure.position);
-        if(distance < 4)
+        if(distance < 4 && isMap == 0)
         {
-            Destroy(treasure);
+            isMap = 5;
+            treasure.position = new Vector3(0, 0, -50);
             text.text = "Hooray";
         }
-
+        else if (isMap > 0)
+        {
+            isMap--;
+        }
         Camera.main.transform.position = transform.position + new Vector3(0f, 15f, -10f);
 		
 	}
